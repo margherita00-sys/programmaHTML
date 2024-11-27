@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escape Room Goniometrica</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: lightgreen;
+      margin: 1px;
+      padding: 2px;
+      text-align: center;
+    }
+
+    .room {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      z-index: -1;
+    }
+
+    .room.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 1;
+    }
+
+    .question {
+      font-size: 20px;
+      margin-top: 20px;
+      margin-bottom: 22px;
+     
+    }
+
+    .input-container {
+      margin-bottom: 24px;
+    }
+
+    .input-container input {
+      padding: 12px;
+      font-size: 18px;
+      width: 400px;
+      max-width: 90%;
+    }
+
+    .button {
+      padding: 20px 30px;
+      font-size: 18px;
+      background-color: lightblue;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: blue;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: green; 
+    }
+
+    h2 {
+      color: black; 
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      margin-bottom: 40px;
+      color: blue; 
+    }
+
+    h4 {
+      color: purple;
+    }
+
+    h5 {
+      color: red;
+    }
+
+    /* Centra il titolo in ogni stanza */
+    .room h2 {
+      text-align: center;
+      color: darkblue;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Pagina di introduzione (pagina iniziale) -->
+  <div id="start-page" class="room active">
+    <h1>Escape Room Goniometrica</h1>
+    <h2>Risolvi ogni enigma per passare al livello successivo.</h2> 
+    <h3>Attenzione! La chiave per passare al livello successivo è la risposta all'indizio.</h3>
+    <button class="button" onclick="startGame()">Iniziamo! </button>
+  </div>
+
+  <!-- Stanze dell'escape room -->
+  <div id="room-1" class="room">
+    <h2>Enigma 1</h2>
+    <p class="question">Trova tutte le soluzioni di \( \sin(x) = - \frac{\sqrt{3}}{2} \) in \([0, 2\pi]\)</p>
+    <p><h4>Indizio: la chiave è il risultato della somma di tutte le soluzioni diviso \(\pi\).</h4></p>
+    <div class="input-container">
+      <input type="text" id="answer-1" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(1, '3')">Avanti</button>
+  </div>
+
+  <div id="room-2" class="room">
+    <h2>Enigma 2</h2>
+    <p class="question">Risolvi: \(2 \cos^2(x)- 3 \cos(x)+1 = 0 \) in \([0, 2\pi]\)</p>
+    <p><h4> Indizio: la chiave corrisponde al numero delle soluzioni frazionarie.</h4></p>
+    <div class="input-container">
+      <input type="text" id="answer-2" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(2, '2')">Avanti</button>
+  </div>
+
+  <div id="room-3" class="room">
+    <h2>Enigma 3</h2>
+    <p class="question">Trova tutte le soluzioni di: \( \sin(2x) = \sin(x) \) in \([0, 2\pi]\).</p>
+    <p><h4>Indizio: la chiave è il numero totale di soluzioni dell'equazione nell'intervallo \([0, 2\pi]\).</h4></p>
+    <div class="input-container">
+      <input type="text" id="answer-3" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(3, '5')">Avanti</button>
+  </div>
+
+  <div id="room-4" class="room">
+    <h2>Enigma 4</h2>
+    <p class="question">Risolvi \( \cos(2x) + \sin(x) = 0 \) in \([0, 2\pi]\).</p>
+    <p><h4>Indizio: la chiave è la soluzione più grande diviso \(\pi\) (in decimali).</h4></p>
+    <div class="input-container">
+      <input type="text" id="answer-4" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(4, '1.83')">Avanti</button>
+  </div>
+
+  <div id="room-5" class="room">
+    <h2>Enigma 5</h2>
+    <p class="question"> Siano \(\alpha\) e \(\beta\) due angoli tali che \(\sin(\alpha)\)=\(\frac{5}{3}\)e \(\cos(\beta\))=\(\frac{3}{5}\). Calcola \(\sin(\alpha\) + \(\beta\)) sapendo che \(\alpha\) e \(\beta\) appartengono al I quadrante. 
+    <p><h4>Indizio: la chiave è il valore di \(\sin(\alpha\) + \(\beta\)) (in decimali).</h4></p>
+    <div class="input-container">
+      <input type="text" id="answer-5" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(5, '0.97')">Avanti</button>  
+  </div>
+
+  <div id="room-6" class="room">    
+    <h2>Enigma 6</h2>
+    <p class="question">Un triangolo ha due angoli che soddisfano: \( \tan(x) + \tan(y) = \sin(x+y) \). Trova il valore di x se \( y= \frac{\pi}{2}\)</p>
+    <p><h4>Indizio: la chiave è il valore di x corrispondente all'angolo di ascissa negativa e ordinata positiva (in decimali).</h4></p>
+    <div class="input-container">
+      <input type="text" id="answer-6" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(6, '0.75')">Avanti</button>
+  </div>
+
+  <div id="room-7" class="room">
+    <h2>Enigma 7</h2>
+    <p class="question">Trova tutte le soluzioni di \( \sin(x) + \cos(x)= \frac{\sqrt{2}}{2} \) in \([0, 2\pi]\).</p>
+    <p><h4>Indizio: la chiave è somma tutte le soluzioni e diviso \(\pi\) (in decimali).</h4></p>
+    <div class="input-container">
+      <input type="text" id="answer-7" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(7, '0.67')">Completa</button>
+  </div>
+
+</div>
+  <div id="room-8" class="room">
+  <h2>Enigma 8</h2>
+  <p class="question"> Risolvi per x in funzione del parametro a: \( \cos^2(x) + a \sin(x) = 1 \). Per quali valori di a esistono soluzioni reali? 
+</p>
+<p><h4> Indizio: la chiave è il valore massimo che a può assumere.</p>
+    <div class="input-container">
+      <input type="text" id="answer-8" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(8, '1')">Completa</button>
+  </div>
+
+</div>
+  <div id="room-9" class="room">
+  <h2>Enigma 9</h2>
+    <p class="question"> Sia \( P(\sin(\theta), \cos(\theta)) \) un punto tale che \(\sin(\theta)\)=\(\frac{4}{5}\) e tale  che \(\cos(\theta)\)<0. Qual è la distanza tra il punto P e l'asse y? 
+</p>
+<p><h4> Indizio: la chiave è il valore della distanza tra P e l'asse y (in decimali).</p>
+    <div class="input-container">
+      <input type="text" id="answer-9" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(9, '-0.6')">Completa</button>
+  </div>
+
+</div>
+  <div id="room-10" class="room">
+ <h2>Enigma 10</h2>
+<h3> Ci sei quasi! L'ultimo step per portare a termine tutti i livelli ed uscire è rispondere al seguente enigma. </h3>
+    <p class="question"> Risolvi la seguente equazione: \(\cos^6(x)\)-2\(\cos^4(x)\)+\(\cos^2(x)\)=0 in \([0, 2\pi]\).</p>
+<p><h4> Indizio: la chiave finale è il numero dei valori massimo che la x può assumere.</p>
+    <div class="input-container">
+      <input type="text" id="answer-10" placeholder="Risposta:">
+    </div>
+    <button class="button" onclick="checkAnswer(10, '4')">Completa</button>
+  </div>
+
+
+  <div id="room-11" class="room">
+    
+<h3>Hai completato tutti gli enigmi!</h3>
+<h1>Complimenti!<h1\> 
+    <p>Hai risolto l'escape room!</p>
+  </div>
+
+  <script>
+    // Funzione per avviare il gioco e passare alla prima stanza
+    function startGame() {
+      document.getElementById('start-page').classList.remove('active'); // Nasconde la pagina iniziale
+      document.getElementById('room-1').classList.add('active'); // Mostra la prima stanza
+    }
+
+    // Funzione per controllare le risposte
+    function checkAnswer(level, correctAnswer) {
+      const userAnswer = document.getElementById(`answer-${level}`).value.trim();
+      if (userAnswer === correctAnswer) {
+        document.getElementById(`room-${level}`).classList.remove('active');
+        const nextRoom = document.getElementById(`room-${level + 1}`);
+        if (nextRoom) {
+          nextRoom.classList.add('active');
+        } else {
+          document.getElementById('complete').classList.add('active');
+        }
+      } else {
+        alert("Risposta errata! Riprova.");
+      }
+    }
+  </script>
+
+</body>
+</html>
